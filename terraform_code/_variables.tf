@@ -22,6 +22,6 @@ variable "workstation_ip" {
 variable "amis" {
   type = map(any)
   default = {
-    "us-east-1" : "ami-01816d07b1128cd2d"
+    "us-east-1" : "ami-0e2c8caa4b6378d8c"
   }
 }

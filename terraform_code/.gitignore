@@ -4,4 +4,5 @@
 **/.terraform-version
 **/.terraform.lock.hcl
 **/.terraform/*
+**/extra_files/*
 **/.DS_Store

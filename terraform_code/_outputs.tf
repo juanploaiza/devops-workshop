@@ -10,6 +10,10 @@ output "subnet2_id" {
   value = aws_subnet.subnet2.id
 }
 
-output "web_instance_public_ip" {
-  value = aws_instance.web.public_ip
+output "jenkins-master_instance_public_ip" {
+  value = aws_instance.jenkins["jenkins-master"].public_ip
+}
+
+output "build-slave_instance_public_ip" {
+  value = aws_instance.jenkins["build-slave"].public_ip
 }
