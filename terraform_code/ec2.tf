@@ -20,9 +20,9 @@ resource "aws_security_group" "jenkins" {
   }
 
   ingress {
-    description = "443 from anywhere"
-    from_port   = 443
-    to_port     = 443
+    description = "Jenkins port from anywhere"
+    from_port   = 8080
+    to_port     = 8080
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
