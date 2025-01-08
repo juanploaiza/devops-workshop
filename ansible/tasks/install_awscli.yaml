@@ -2,7 +2,7 @@
 - name: Install package dependencies.
   package: name={{ item }} state=present
   with_items:
-    - python
+    - python3
     - unzip
 
 - name: Download the awscli bundle.
