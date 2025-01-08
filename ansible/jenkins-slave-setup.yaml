@@ -78,4 +78,4 @@
       state: link
     become: true
 
-  - include: tasks/awscli.yaml
+  - import_tasks: tasks/awscli.yaml
