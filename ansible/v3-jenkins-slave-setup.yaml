@@ -1,0 +1,70 @@
+- hosts: jenkins-slave
+  become: true
+  tasks:
+  - name: update ubuntu repo and cache
+    apt:
+      update_cache: yes
+      cache_valid_time: 3600
+
+  - name: Install Java
+    apt:
+      name: openjdk-17-jre
+      state: present
+
+  - name: Download maven packages
+    get_url:
+      url: https://dlcdn.apache.org/maven/maven-3/3.9.9/binaries/apache-maven-3.9.9-bin.tar.gz
+      dest: /opt
+
+  - name: extract maven
+    unarchive:
+      src: /opt/apache-maven-3.9.9-bin.tar.gz
+      dest: /opt
+      remote_src: yes
+
+  - name: install docker
+    apt:
+      name: docker.io
+      state: present
+  
+  - name: start docker
+    service:
+      name: docker
+      state: started
+      enabled: yes
+  
+  - name: give 777 permission to docker.sock
+    file:
+      path: /var/run/docker.sock
+      mode: 0777
+  
+  - name: start docker service on boot time
+    service:
+      name: docker
+      enabled: yes
+
+- name: create kubectl versioned directory
+  file:
+    path: /opt/kubectl-{{ version.content }}
+    state: directory
+  become: true
+
+- name: Download the latest kubectl release
+  uri:
+    url: https://dl.k8s.io/release/{{ version.content }}/bin/linux/amd64/kubectl
+    dest: /opt/kubectl-{{ version.content }}
+  register: kubectl
+  become: true
+
+- name: Change kubectl file permission
+  file:
+    path: "/opt/kubectl-{{ version.content }}/kubectl"
+    mode: '0755'
+  become: true
+
+- name: create a symlink to kubectl
+  file:
+    src: "/opt/kubectl-{{ version.content }}/kubectl"
+    dest: "/usr/bin/kubectl"
+    state: link
+  become: true

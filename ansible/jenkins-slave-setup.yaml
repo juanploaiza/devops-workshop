@@ -1,5 +1,8 @@
+---
 - hosts: jenkins-slave
   become: true
+  vars_files:
+    - vars/awscli.yaml
   tasks:
   - name: update ubuntu repo and cache
     apt:
@@ -42,3 +45,37 @@
     service:
       name: docker
       enabled: yes
+
+  - name: Get latest kubectl version
+    uri:
+      url: https://dl.k8s.io/release/stable.txt
+      return_content: yes
+    register: version
+    
+  - name: create kubectl versioned directory
+    file:
+      path: /opt/kubectl-{{ version.content }}
+      state: directory
+    become: true
+
+  - name: Download the latest kubectl release
+    uri:
+      url: https://dl.k8s.io/release/{{ version.content }}/bin/linux/amd64/kubectl
+      dest: /opt/kubectl-{{ version.content }}
+    register: kubectl
+    become: true
+
+  - name: Change kubectl file permission
+    file:
+      path: "/opt/kubectl-{{ version.content }}/kubectl"
+      mode: '0755'
+    become: true
+
+  - name: create a symlink to kubectl
+    file:
+      src: "/opt/kubectl-{{ version.content }}/kubectl"
+      dest: "/usr/bin/kubectl"
+      state: link
+    become: true
+
+  - include: tasks/awscli.yaml
