@@ -15,7 +15,7 @@
   register: aws_cli_unarchive_installer
 
 - name: Install awscli package.
-  shell: python3 /tmp/aws/install
+  shell: sudo ./tmp/aws/install
   when: aws_cli_unarchive_installer.changed
 
 - name: Configure AWS.
