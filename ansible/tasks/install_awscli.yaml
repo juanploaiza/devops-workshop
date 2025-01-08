@@ -7,16 +7,15 @@
 
 - name: Download the awscli bundle.
   get_url: url=https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip dest=/tmp/awscli-exe.zip
-  register: aws_cli_download_bundle
 
 - name: Unarchive the installer.
   unarchive: src=/tmp/awscli-exe.zip dest=/tmp remote_src=yes creates=/tmp/aws
-  when: aws_cli_download_bundle.changed
-  register: aws_cli_unarchive_installer
 
 - name: Install awscli package.
-  shell: sudo ./tmp/aws/install
-  when: aws_cli_unarchive_installer.changed
+  shell: 
+    cmd: ./aws/install 
+    chdir: /tmp
+    creates: /usr/local/bin/aws
 
 - name: Configure AWS.
   shell: aws configure set {{ item.key }} {{ item.value }} --profile {{ aws_profile }}
