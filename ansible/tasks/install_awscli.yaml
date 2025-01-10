@@ -26,4 +26,3 @@
     aws_session_token:  "{{ aws_session_token }}"
     region: "{{ aws_region }}"
     format: "{{ aws_format }}"
-  changed_when: false
