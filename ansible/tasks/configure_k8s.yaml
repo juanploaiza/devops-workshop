@@ -1,0 +1,3 @@
+---
+- name: Configure k8s.
+  shell: aws eks update-kubeconfig --region {{ aws_region  }} --name {{ eks_cluster_name }} --profile {{ aws_profile }}
