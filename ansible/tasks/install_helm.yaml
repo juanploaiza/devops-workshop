@@ -4,6 +4,6 @@
 
 - name: Install helm package.
   shell: 
-    cmd: .get_helm.sh
+    cmd: ./get_helm.sh
     chdir: /tmp
     creates: /usr/local/bin/helm
