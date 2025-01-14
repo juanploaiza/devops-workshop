@@ -8,6 +8,7 @@ spec:
   selector:
     app: valaxy-rtp
   ports:
-    - nodePort: 30082
+    - protocol: TCP
+    nodePort: 30082
       port: 8000
       targetPort: 8000
