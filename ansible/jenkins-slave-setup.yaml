@@ -64,5 +64,5 @@
   - import_tasks: tasks/configure_k8s.yaml
     become: false
 
- - import_tasks: tasks/configure_helm.yaml
+  - import_tasks: tasks/configure_helm.yaml
     become: false
