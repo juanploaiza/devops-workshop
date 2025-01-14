@@ -1,6 +1,6 @@
 ---
 - name: Download helm package.
-  get_url: url=https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 dest=/tmp/get_helm.sh
+  get_url: url=https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 dest=/tmp/get_helm.sh mod=0755
 
 - name: Install helm package.
   shell: 
