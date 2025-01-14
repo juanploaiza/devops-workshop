@@ -1,0 +1,4 @@
+---
+- name: Configure helm.
+  shell: helm repo add stable https://charts.helm.sh/stable
+  no_log: True

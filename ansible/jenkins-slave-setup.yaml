@@ -50,10 +50,14 @@
 
   - import_tasks: tasks/install_awscli.yaml
 
+  - import_tasks: tasks/install_helm.yaml
+
   - import_tasks: tasks/configure_awscli.yaml
 
   - import_tasks: tasks/configure_k8s.yaml
 
+  - import_tasks: tasks/configure_helm.yaml
+  
   - import_tasks: tasks/configure_awscli.yaml
     become: false
 
