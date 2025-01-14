@@ -53,3 +53,9 @@
   - import_tasks: tasks/configure_awscli.yaml
 
   - import_tasks: tasks/configure_k8s.yaml
+
+  - import_tasks: tasks/configure_awscli.yaml
+    become: false
+
+  - import_tasks: tasks/configure_k8s.yaml
+    become: false
