@@ -1,0 +1,4 @@
+---
+- name: Install Prometheus.
+  shell: helm install prometheus prometheus-community/kube-prometheus-stack --namespace monitoring
+  no_log: True

@@ -1,4 +1,8 @@
 ---
-- name: Configure helm.
+- name: Configure charts helm.
   shell: helm repo add stable https://charts.helm.sh/stable
+  no_log: True
+
+- name: Configure helm.
+  shell: helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
   no_log: True
